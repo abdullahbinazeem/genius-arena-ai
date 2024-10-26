@@ -5,8 +5,8 @@ type Props = {};
 const page = (props: Props) => {
   const rows = Array.from({ length: 10 }, (v, i) => ({
     placement: `#${i + 1}`,
-    name: i % 3 != 0 ? `Abdullah` : `Jayadeep`,
-    score: `${(10 - i) * 50}`,
+    name: jsCookies().name.map(),
+    score: jsCookies().score.map(),
   }));
   return (
     <div className="grid place-content-center w-full h-[100vh]">
