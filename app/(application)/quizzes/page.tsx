@@ -11,15 +11,22 @@ const page = async () => {
 
   return (
     <Container>
-      <div>
-        {quizzes.map((quiz) => (
-          <a key={quiz.id} href={`/quizzes/${quiz.id}`}>
-            <h1>{quiz.name}</h1>
-          </a>
-        ))}
-      </div>
-      <div>
-        <AddQuiz />
+      <div className="App">
+        <div className="main">
+          <h3 className="title">Genius Arena! Play a Game</h3>
+          <AddQuiz />
+          <div className="lead">
+            <br></br>
+            <a className="nav-button text-center" href="/leaderboard">
+              Leaderboard
+            </a>
+            <div className="block text-center mt-10">
+              <a className="text-xl underline mt-10" href="/tutorial">
+                Tutorial
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </Container>
   );

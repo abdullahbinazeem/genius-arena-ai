@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import prisma from "@/lib/db";
 import Container from "@/components/container";
 import QuestionOption from "./question_option";

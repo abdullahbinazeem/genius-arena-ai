@@ -5,9 +5,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Loader } from "lucide-react";
 
+import { useRouter } from "next/navigation";
+
 type Props = {};
 
 const AddQuiz = (props: Props) => {
+  const router = useRouter();
+
   const [category, setCategory] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,6 +33,7 @@ const AddQuiz = (props: Props) => {
 
       toast.success("Successfully created course.");
       setIsLoading(false);
+      router.push(`/quizzes/${response.data}`);
     } catch {
       toast.error("Failed to create course, Try again!");
       setIsLoading(false);
@@ -38,23 +43,25 @@ const AddQuiz = (props: Props) => {
 
   return (
     <div className="mt-10">
+      <p>Enter a topic and press the play button to start a new game!</p>
+      <br></br>
       <input
         type="text"
         placeholder="course category"
-        className="border-2"
+        className="border-2 textinput m-auto"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       />
-
+      <br></br>
       <button
         onClick={() => {
           toast.success("clicked button.");
           createCourse();
         }}
         disabled={isLoading}
-        className="block mt-2 p-3 bg-blue-500"
+        className="nav-button text-center m-auto"
       >
-        {!isLoading ? "Create Course" : <Loader className="animate-spin" />}
+        {!isLoading ? "Create Quiz!" : <Loader className="animate-spin" />}
       </button>
     </div>
   );

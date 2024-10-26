@@ -65,7 +65,7 @@ export async function POST(req: Request, res: Response) {
             Questions.map((questionStr) => questionStr),
         },
       ],
-      temperature: 0.7,
+      temperature: 0.5,
       max_tokens: 150,
     });
 
@@ -103,5 +103,5 @@ export async function POST(req: Request, res: Response) {
     });
   }
 
-  return NextResponse.json(Jsonified);
+  return NextResponse.json(quiz.id);
 }
