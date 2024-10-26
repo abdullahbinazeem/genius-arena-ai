@@ -1,6 +1,8 @@
 import prisma from "@/lib/db";
 import { NextResponse } from "next/server";
 
+import { auth } from "@clerk/nextjs/server";
+
 import OpenAI from "openai";
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
@@ -9,10 +11,11 @@ export async function POST(req: Request, res: Response) {
   } catch (err: any) {
     return NextResponse.json({ error: err.message });
   }
-  //   const { userId } = await auth();
-  //   if (!userId) {
-  //     return new NextResponse("Unauthorized", { status: 401 });
-  //   }
+  const { userId } = await auth();
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
   console.log("accessed");
 
   const body = await req.json();
@@ -76,7 +79,7 @@ export async function POST(req: Request, res: Response) {
   const quiz = await prisma.quiz.create({
     data: {
       name: category,
-      userId: "test",
+      userId: userId,
       difficulty,
     },
   });
